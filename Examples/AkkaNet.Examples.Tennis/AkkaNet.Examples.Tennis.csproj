@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\..\Common.props" />
+	<Import Project="..\..\CommonAkkaNet.props" />
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Akka.DependencyInjection" Version="1.5.37" />
+	</ItemGroup>
+
+</Project>

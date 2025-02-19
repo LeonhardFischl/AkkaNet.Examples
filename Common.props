@@ -1,0 +1,20 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Import Project="CommonVersion.props" />
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<LangVersion>preview</LangVersion>
+		<EnablePreviewFeatures>true</EnablePreviewFeatures>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Configurations>Debug;Release</Configurations>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+		<AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
+		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+		<ServerGarbageCollection>true</ServerGarbageCollection>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+		<CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+		<Title>$(AssemblyName)</Title>
+	</PropertyGroup>
+</Project>
