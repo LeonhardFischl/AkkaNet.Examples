@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PoCs", "PoCs", "{252F6E32-5
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkkaNet.Examples.Restaurant.PoC", "Examples\AkkaNet.Examples.Restaurant.PoC\AkkaNet.Examples.Restaurant.PoC.csproj", "{8CB5BC85-534C-686E-900E-59232A701359}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akka.Net.Examples.Restaurant.PoC.Api", "Examples\Akka.Net.Examples.Restaurant.PoC.Api\Akka.Net.Examples.Restaurant.PoC.Api.csproj", "{9F336C33-BB83-4848-B31D-C243A03DE47A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{8CB5BC85-534C-686E-900E-59232A701359}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CB5BC85-534C-686E-900E-59232A701359}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CB5BC85-534C-686E-900E-59232A701359}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F336C33-BB83-4848-B31D-C243A03DE47A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F336C33-BB83-4848-B31D-C243A03DE47A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F336C33-BB83-4848-B31D-C243A03DE47A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F336C33-BB83-4848-B31D-C243A03DE47A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{168E10BC-DEA5-4B03-A5D0-58DE49DABF36} = {F4EE25E1-DB3B-4432-B23F-9FEB94927C56}
 		{7A16F173-5E10-0C6A-FCB2-238ED59E5396} = {F4EE25E1-DB3B-4432-B23F-9FEB94927C56}
 		{8CB5BC85-534C-686E-900E-59232A701359} = {252F6E32-5687-4DFF-B2FB-85936DCEA52D}
+		{9F336C33-BB83-4848-B31D-C243A03DE47A} = {252F6E32-5687-4DFF-B2FB-85936DCEA52D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {555879C2-F0F5-4134-85D8-CDE4934F0EA9}
