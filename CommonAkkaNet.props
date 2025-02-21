@@ -1,7 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
 	<ItemGroup>
-		<PackageReference Include="Akka" Version="1.5.37" />
+		<PackageReference Include="Akka" Version="1.5.38" />
 	</ItemGroup>
 
 </Project>
