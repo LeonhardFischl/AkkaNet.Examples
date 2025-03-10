@@ -3,9 +3,8 @@
 		<Version>1.2.0</Version>
 		<AssemblyVersion>1.2.0</AssemblyVersion>
 		<FileVersion>1.2.0</FileVersion>
-		<Company>EXXETA AG</Company>
-		<Copyright>Leonhard Fischl, EXXETA AG</Copyright>
-		<!--<PackageTags>Brownbag,Examples,AkkaNet,SES,MPT,EXXETA</PackageTags>-->
+		<Company></Company>
+		<Copyright>Leonhard Fischl</Copyright>
 		<Title>$(AssemblyName)</Title>
 	</PropertyGroup>
 </Project>
