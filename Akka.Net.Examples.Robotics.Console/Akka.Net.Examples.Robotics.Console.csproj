@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="GrpcServerService.cs" />
+	  <Compile Remove="MessageActor.cs" />
+	  <Compile Remove="MessageReceived.cs" />
+	  <Compile Remove="MessageService.cs" />
+	  <Compile Remove="Program.cs" />
+	  <Compile Remove="Server\ChatService.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Akka" Version="1.5.43" />
+		<PackageReference Include="Akka.Cluster" Version="1.5.43" />
+		<PackageReference Include="Akka.DependencyInjection" Version="1.5.43" />
+		<PackageReference Include="Akka.Hosting" Version="1.5.42" />
+		<PackageReference Include="Grpc.AspNetCore" Version="2.57.0" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.6" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Server\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Protobuf Include="proto\greet.proto" GrpcServices="Server" />
+	</ItemGroup>
+
+</Project>

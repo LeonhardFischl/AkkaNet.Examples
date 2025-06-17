@@ -1,0 +1,35 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "ChatServerApp.Protos";
+
+package chat;
+
+service ChatServer {
+  // Bidirectional communication stream between client and server
+  rpc HandleCommunication(stream ClientMessage) returns (ServerSummary);
+ }
+
+message ServerSummary {
+  int32 message_count = 1;
+}
+
+//Client Messages:
+message ClientMessage {
+  oneof content {
+	ClientMessageStart start = 1;
+	ClientMessageCustomer customer = 2;
+	ClientMessageStop stop = 3;
+  }
+}
+
+message ClientMessageStart {
+  string initial = 1;
+}
+
+message ClientMessageCustomer {
+  string name = 1;
+}
+
+message ClientMessageStop {
+  string reason = 1;
+}

@@ -28,6 +28,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akka.Net.Examples.Remote.Se
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akka.Net.Examples.Remote.Client", "Examples\Akka.Net.Examples.Remote.Client\Akka.Net.Examples.Remote.Client.csproj", "{CC3E44BE-7B37-4B8B-9AA5-6F056D62C82D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatServerApp", "ChatServerApp\ChatServerApp.csproj", "{05BC3B5D-4033-1407-D7A5-AD0FC792D5C0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Robotics", "Robotics", "{17F401DB-CF65-466B-A4E1-DBCD2F0D5349}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkkaNet.Examples.GrpcServiceExample", "Examples\AkkaNet.Examples.GrpcServiceExample\AkkaNet.Examples.GrpcServiceExample.csproj", "{B909EB48-8ABD-4434-81A7-26E7700CF8BB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gRPC Examples", "gRPC Examples", "{F20A0DD5-02C5-489D-BDED-8FAB9C1B1908}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +66,14 @@ Global
 		{CC3E44BE-7B37-4B8B-9AA5-6F056D62C82D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC3E44BE-7B37-4B8B-9AA5-6F056D62C82D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC3E44BE-7B37-4B8B-9AA5-6F056D62C82D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05BC3B5D-4033-1407-D7A5-AD0FC792D5C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05BC3B5D-4033-1407-D7A5-AD0FC792D5C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05BC3B5D-4033-1407-D7A5-AD0FC792D5C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05BC3B5D-4033-1407-D7A5-AD0FC792D5C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B909EB48-8ABD-4434-81A7-26E7700CF8BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B909EB48-8ABD-4434-81A7-26E7700CF8BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B909EB48-8ABD-4434-81A7-26E7700CF8BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B909EB48-8ABD-4434-81A7-26E7700CF8BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +85,8 @@ Global
 		{9F336C33-BB83-4848-B31D-C243A03DE47A} = {252F6E32-5687-4DFF-B2FB-85936DCEA52D}
 		{30A89C5E-914F-1F6F-45E1-20CB658F4A12} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{CC3E44BE-7B37-4B8B-9AA5-6F056D62C82D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{05BC3B5D-4033-1407-D7A5-AD0FC792D5C0} = {F20A0DD5-02C5-489D-BDED-8FAB9C1B1908}
+		{B909EB48-8ABD-4434-81A7-26E7700CF8BB} = {F20A0DD5-02C5-489D-BDED-8FAB9C1B1908}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {555879C2-F0F5-4134-85D8-CDE4934F0EA9}
