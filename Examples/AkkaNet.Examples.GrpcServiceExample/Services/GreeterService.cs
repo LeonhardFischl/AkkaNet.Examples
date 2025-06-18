@@ -21,7 +21,8 @@ public class GreeterService : Greeter.GreeterBase
 	{
 		this._logger = logger;
 		// Get the ActorRef from the required actor wrapper
-		this._remoteRos2MessageReceiveActor = remoteRos2MessageReceiveActor.ActorRef; 
+		//this._remoteRos2MessageReceiveActor = remoteRos2MessageReceiveActor.ActorRef; 
+		this._remoteRos2MessageReceiveActor = remoteRos2MessageReceiveActor.GetAsync().Result;
 	}
 
 	public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
