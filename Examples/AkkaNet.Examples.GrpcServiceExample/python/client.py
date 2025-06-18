@@ -4,11 +4,11 @@ import greet_pb2_grpc
 import time
  
 def run():
-    print("Connecting to gRPC server at localhost:5077...")
+    print("Connecting to gRPC server at localhost:5000...")
     
     try:
         # The port number must match the port of the gRPC server.
-        with grpc.insecure_channel("localhost:5077") as channel:
+        with grpc.insecure_channel("localhost:5000") as channel:
             client = greet_pb2_grpc.GreeterStub(channel)
             try:
                 print("Sending 20000 requests...")
