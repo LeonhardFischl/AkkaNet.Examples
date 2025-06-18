@@ -19,15 +19,15 @@ internal class Program
 		});
 
 
-		builder.Services.AddAkka("Ros2Python2AkkaNetClusterSystem", (akkaConfigurationBuilder, provider) =>
-		{
-			// Configure your Akka.NET system here
-			akkaConfigurationBuilder.WithActors((akkaConfiguration, registry, _) =>
-			{
-				// Register your actors here
-				akkaConfiguration.ActorOf<RemoteRos2MessageReceiveActor>("remoteRos2MessageReceiveActor");
-			});
-		});
+		//builder.Services.AddAkka("Ros2Python2AkkaNetClusterSystem", (akkaConfigurationBuilder, provider) =>
+		//{
+		//	// Configure your Akka.NET system here
+		//	akkaConfigurationBuilder.WithActors((akkaConfiguration, registry, _) =>
+		//	{
+		//		// Register your actors here
+		//		akkaConfiguration.ActorOf<RemoteRos2MessageReceiveActor>("remoteRos2MessageReceiveActor");
+		//	});
+		//});
 
 		var app = builder.Build();
 

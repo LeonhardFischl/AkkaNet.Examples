@@ -1,9 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 	<Import Project="..\..\Common.props" />
 
 	<PropertyGroup>
 		<TargetFramework>net9.0</TargetFramework>
-		<UserSecretsId>88c16b92-ad1d-42c6-8200-d0ce0e16fb6f</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<DockerfileContext>.</DockerfileContext>
 	</PropertyGroup>
