@@ -11,6 +11,5 @@ RUN dotnet publish -o out --self-contained
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:9.0@sha256:b4bea3a52a0a77317fa93c5bbdb076623f81e3e2f201078d89914da71318b5d8
 WORKDIR /App
-EXPOSE 5000
 COPY --from=build /App/out .
 ENTRYPOINT ["dotnet", "AkkaNet.Examples.GrpcServiceExample.dll"]
