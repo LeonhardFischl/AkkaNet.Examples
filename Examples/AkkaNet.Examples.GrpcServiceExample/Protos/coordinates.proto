@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option csharp_namespace = "AkkaNet.Examples.GrpcServiceExample";
+
+package coordinates;
+
+// Service definition
+service CoordinateService {
+    rpc SendCoordinates(CoordinateArray) returns (CoordinateResponse);
+}
+
+// Message for a single 3D point
+message Point3D {
+    float x = 1;
+    float y = 2;
+    float z = 3;
+}
+
+// Message for an array of 3D points
+message CoordinateArray {
+    repeated Point3D points = 1;
+}
+
+// Response message from the server
+message CoordinateResponse {
+    string message = 1;
+    int32 points_received = 2;
+}
