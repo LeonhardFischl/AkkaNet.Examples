@@ -69,7 +69,7 @@ def calculate_statistics(points):
 def run():
     print("LiDAR Point Cloud gRPC Client")
     print("=" * 40)
-    print("Connecting to gRPC server at ec2-3-78-137-76.eu-central-1.compute.amazonaws.com:8080...")
+    print("Connecting to gRPC server at localhost:8080...")
     
     # Configuration
     csv_file_path = "lidar_data.csv"  # Update path as needed
@@ -92,7 +92,7 @@ def run():
         print(f"\nSplit into {total_batches} batches of up to {batch_size} points each")
         
         # Connect to server
-        with grpc.insecure_channel("ec2-3-78-137-76.eu-central-1.compute.amazonaws.com:8080") as channel: # localhost # ec2-3-78-137-76.eu-central-1.compute.amazonaws.com
+        with grpc.insecure_channel("localhost:8080") as channel: # localhost # ec2-3-78-137-76.eu-central-1.compute.amazonaws.com
             client = coordinates_pb2_grpc.CoordinateServiceStub(channel)
             
             # Track statistics
