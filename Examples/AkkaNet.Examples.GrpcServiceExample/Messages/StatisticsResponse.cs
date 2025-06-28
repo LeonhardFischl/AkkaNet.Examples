@@ -1,10 +1,6 @@
 ﻿namespace AkkaNet.Examples.GrpcServiceExample.Messages;
 
-public sealed class StatisticsResponse(
-	double throughputPerSecond,
-	DateTime? startTime,
-	DateTime? endTime,
-	int processedCount)
+public sealed class StatisticsResponse(double throughputPerSecond, DateTime? startTime, DateTime? endTime, int processedCount)
 {
 	public double ThroughputPerSecond { get; } = throughputPerSecond;
 	public DateTime? StartTime { get; } = startTime;

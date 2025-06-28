@@ -55,6 +55,12 @@ internal class Program
 		// Add a simple health check endpoint
 		// Health checks have been moved to the HomeController
 
+		app.MapGet("/health", (ILogger<Program> logger) =>
+		{
+			logger.LogInformation("Healthy. Service is running...");
+			return Results.Ok("Healthy. Service is running...");
+		});
+
 		// Graceful shutdown
 		var lifetime = app.Services.GetRequiredService<IHostApplicationLifetime>();
 		lifetime.ApplicationStopping.Register(() =>
@@ -65,8 +71,10 @@ internal class Program
 		Console.WriteLine("Starting Coordinate Processor Server...");
 		Console.WriteLine("HTTP/1.1 endpoint: http://localhost:80 (REST API, Health checks)");
 		Console.WriteLine("HTTP/2 endpoint: http://localhost:8080 (gRPC only)");
-		Console.WriteLine("Health check: http://localhost:80/health");
-		Console.WriteLine("Statistics API: http://localhost:80/api/statistics");
+		Console.WriteLine("Health check: http://localhost:80/api/health");
+		Console.WriteLine("Version: http://localhost:80/api/version");
+		Console.WriteLine("Basic statistics: http://localhost:80/api/statistics");
+		Console.WriteLine("Detailed statistics: http://localhost:80/api/statistics/detailed");
 
 		app.Run();
 	}

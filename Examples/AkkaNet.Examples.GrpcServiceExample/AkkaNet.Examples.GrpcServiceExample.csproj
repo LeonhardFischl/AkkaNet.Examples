@@ -3,23 +3,44 @@
 
 	<PropertyGroup>
 		<TargetFramework>net9.0</TargetFramework>
-		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-		<DockerfileContext>.</DockerfileContext>
+		<!--<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerfileContext>.</DockerfileContext>-->
 	</PropertyGroup>
 
 	<ItemGroup>
-		<!--<Protobuf Include="Protos\greet.proto" GrpcServices="Server" />-->
 		<Protobuf Include="*/*.proto" GrpcServices="Server" ProtoRoot="Protos" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Akka" Version="1.5.43" />
-		<PackageReference Include="Akka.Cluster" Version="1.5.43" />
-		<PackageReference Include="Akka.DependencyInjection" Version="1.5.43" />
-		<PackageReference Include="Akka.Hosting" Version="1.5.42" />
-		<PackageReference Include="Akka.Remote" Version="1.5.43" />
+	  <Compile Remove="Controllers\**" />
+	  <Content Remove="Controllers\**" />
+	  <EmbeddedResource Remove="Controllers\**" />
+	  <None Remove="Controllers\**" />
+	  <Protobuf Remove="Controllers\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Actors\OverviewActor.cs" />
+	  <Compile Remove="Processors\PointCloudCoordinateProcessor.cs" />
+	  <Compile Remove="Processors\StatisticsCoordinateProcessor.cs" />
+	  <Compile Remove="Services\CoordinatesService.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Include="Controllers\CoordinatesController.cs" />
+	  <Compile Include="Controllers\HomeController.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Akka.Streams" Version="1.5.43">
+		  <TreatAsUsed>true</TreatAsUsed>
+		</PackageReference>
+
 		<PackageReference Include="Grpc.AspNetCore" Version="2.57.0" />
-		<PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.6" />
+		<PackageReference Include="Grpc.Tools" Version="2.59.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1-Preview.1" />
 	</ItemGroup>
 

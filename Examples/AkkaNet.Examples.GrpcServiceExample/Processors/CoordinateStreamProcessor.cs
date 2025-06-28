@@ -58,4 +58,9 @@ public class CoordinateStreamProcessor
 	{
 		return await _statisticsActor.Ask<StatisticsResponse>(GetStatisticSingleton.Instance, TimeSpan.FromSeconds(5));
 	}
+
+	public async Task<DetailedStatisticsResponse> GetDetailedStatistics()
+	{
+		return await _statisticsActor.Ask<DetailedStatisticsResponse>(GetDetailedStatisticsSingleton.Instance, TimeSpan.FromSeconds(5));
+	}
 }

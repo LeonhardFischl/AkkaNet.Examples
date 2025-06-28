@@ -2,8 +2,6 @@
 
 using Grpc.Core;
 
-using System.Threading.Tasks;
-
 namespace AkkaNet.Examples.GrpcServiceExample.Services;
 
 public class CoordinateGrpcService : CoordinateService.CoordinateServiceBase
