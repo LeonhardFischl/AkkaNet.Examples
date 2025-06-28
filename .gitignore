@@ -356,3 +356,6 @@ KM.EBike-Backend*.xml
 *.rsuser
 /Logs
 /Examples/AkkaNet.Examples.GrpcServiceExample/python/lidar_data_5x-duplicated.csv
+/Examples/AkkaNet.Examples.GrpcServiceExample/python/bmw_320_metallic_blue_lidar.csv
+/Examples/AkkaNet.Examples.GrpcServiceExample/python/bmw_320_realistic_metallic_blue.csv
+/Examples/AkkaNet.Examples.GrpcServiceExample/python/bmw_320_ultra_realistic_metallic_blue.csv

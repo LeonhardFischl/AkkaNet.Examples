@@ -1,6 +1,7 @@
 using Akka.Actor;
 using Akka.Configuration;
 
+using AkkaNet.Examples.GrpcServiceExample.Hubs;
 using AkkaNet.Examples.GrpcServiceExample.Processors;
 using AkkaNet.Examples.GrpcServiceExample.Services;
 
@@ -34,8 +35,28 @@ internal class Program
 			options.MaxSendMessageSize = 50 * 1024 * 1024;    // 50MB
 			options.EnableDetailedErrors = false; // Disable for production
 		});
+
+		// Add SignalR
+		builder.Services.AddSignalR(options =>
+		{
+			options.MaximumReceiveMessageSize = 10 * 1024 * 1024; // 10MB
+			options.EnableDetailedErrors = true; // Enable for development
+		});
+
 		// Add controllers to support REST API
 		builder.Services.AddControllers();
+
+		// Add CORS for development (adjust for production)
+		builder.Services.AddCors(options =>
+		{
+			options.AddPolicy("AllowWebClient", policy =>
+			{
+				policy.WithOrigins("http://localhost:8080", "http://localhost:80")
+					.AllowAnyHeader()
+					.AllowAnyMethod()
+					.AllowCredentials();
+			});
+		});
 
 		var config = ConfigurationFactory.ParseString(@"
 	    akka {
@@ -70,9 +91,15 @@ internal class Program
 		// Configure the HTTP request pipeline.
 		app.MapGrpcService<GreeterService>();
 		app.MapGrpcService<CoordinateGrpcService>();
-		
+
+		// Map SignalR hub
+		app.MapHub<PointCloudHub>("/pointCloudHub");
+
 		// For REST API endpoints
 		app.MapControllers();
+
+		// Serve static files for the web client
+		app.UseStaticFiles();
 
 		// Add a simple health check endpoint
 		// Health checks have been moved to the HomeController
