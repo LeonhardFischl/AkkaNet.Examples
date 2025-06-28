@@ -27,11 +27,12 @@ public class CoordinateStreamProcessor
 		// Start processing tracking
 		_statisticsActor.Tell(new StartProcessing(batchId, points.Count));
 
-		// Create processor actor pool
+		// Create processor actor pool with pool size based on CPU cores
+		var poolSize = Environment.ProcessorCount *  4;
 		// These are the Props for your worker actors (CoordinateProcessorActor)
 		var processorProps = CoordinateProcessorActor.Props(_statisticsActor);
 		// Attach the RoundRobinPool router to the worker Props
-		var processorPool = _actorSystem.ActorOf(processorProps.WithRouter(new RoundRobinPool(Environment.ProcessorCount)), $"processor-pool-{batchId}");
+		var processorPool = _actorSystem.ActorOf(processorProps.WithRouter(new RoundRobinPool(poolSize)), $"processor-pool-{batchId}");
 
 		try
 		{

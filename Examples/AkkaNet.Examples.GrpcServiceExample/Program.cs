@@ -1,4 +1,5 @@
 using Akka.Actor;
+using Akka.Configuration;
 
 using AkkaNet.Examples.GrpcServiceExample.Processors;
 using AkkaNet.Examples.GrpcServiceExample.Services;
@@ -27,12 +28,33 @@ internal class Program
 		});
 
 		// Add services to the container.
-		builder.Services.AddGrpc();
+		builder.Services.AddGrpc(options =>
+		{
+			options.MaxReceiveMessageSize = 50 * 1024 * 1024; // 50MB
+			options.MaxSendMessageSize = 50 * 1024 * 1024;    // 50MB
+			options.EnableDetailedErrors = false; // Disable for production
+		});
 		// Add controllers to support REST API
 		builder.Services.AddControllers();
 
+		var config = ConfigurationFactory.ParseString(@"
+	    akka {
+	        actor {
+	            default-dispatcher {
+	                type = Dispatcher
+	                executor = fork-join-executor
+	                fork-join-executor {
+	                    parallelism-min = 8
+	                    parallelism-factor = 2.0
+	                    parallelism-max = 32
+	                }
+	                throughput = 50
+	            }
+	        }
+	    }");
+
 		// Create and register Akka system
-		ActorSystem actorSystem = ActorSystem.Create("coordinate-system");
+		ActorSystem actorSystem = ActorSystem.Create("coordinate-system", config);
 		builder.Services.AddSingleton(actorSystem);
 		builder.Services.AddSingleton<CoordinateStreamProcessor>();
 
