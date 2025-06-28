@@ -3,6 +3,9 @@ import coordinates_pb2
 import coordinates_pb2_grpc
 import time
 import csv
+import argparse
+import sys
+import os
 
 def load_lidar_points(csv_file_path):
     """Load Point3D objects from LiDAR CSV file"""
@@ -66,16 +69,87 @@ def calculate_statistics(points):
     print(f"  Y range: {min(y_coords):.3f} to {max(y_coords):.3f}")
     print(f"  Z range: {min(z_coords):.3f} to {max(z_coords):.3f}")
 
+def parse_arguments():
+    """Parse command line arguments"""
+    parser = argparse.ArgumentParser(
+        description='LiDAR Point Cloud gRPC Client',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  # Use localhost with default file
+  python %(prog)s --localhost true
+  
+  # Use AWS server with custom file
+  python %(prog)s --localhost false --csv-file my_lidar_data.csv
+  
+  # Use custom server and file
+  python %(prog)s --server my-server.com:9090 --csv-file data.csv
+  
+  # Show help
+  python %(prog)s --help
+        """
+    )
+    
+    parser.add_argument(
+        '--localhost',
+        type=str,
+        choices=['true', 'false'],
+        default='false',
+        help='Use localhost (true) or AWS server (false). Default: false'
+    )
+    
+    parser.add_argument(
+        '--csv-file',
+        type=str,
+        default='lidar_data_5x-duplicated.csv',
+        help='Path to CSV file to load. Default: lidar_data_5x-duplicated.csv'
+    )
+    
+    parser.add_argument(
+        '--server',
+        type=str,
+        help='Custom server address:port (overrides --localhost setting)'
+    )
+    
+    parser.add_argument(
+        '--batch-size',
+        type=int,
+        default=75000,
+        help='Batch size for processing points. Default: 75000'
+    )
+    
+    return parser.parse_args()
+
+def get_server_address(args):
+    """Determine server address based on arguments"""
+    if args.server:
+        return args.server
+    elif args.localhost.lower() == 'true':
+        return 'localhost:8080'
+    else:
+        return 'ec2-3-78-137-76.eu-central-1.compute.amazonaws.com:8080'
+
 def run():
+    # Parse command line arguments
+    args = parse_arguments()
+    
+    # Determine server address
+    server_address = get_server_address(args)
+    csv_file_path = args.csv_file
+    batch_size = args.batch_size
+    
     print("LiDAR Point Cloud gRPC Client")
     print("=" * 40)
-    print("Connecting to gRPC server at ec2-3-78-137-76.eu-central-1.compute.amazonaws.com:8080...")
+    print(f"Server: {server_address}")
+    print(f"CSV File: {csv_file_path}")
+    print(f"Batch Size: {batch_size:,}")
+    print(f"Connecting to gRPC server at {server_address}...")
     
-    # Configuration
-    # lidar_data.csv is a file with over 200000 points
-    # lidar_data_5x-duplicated.csv is a file with 5x duplicated points, over 1 million points
-    csv_file_path = "lidar_data_5x-duplicated.csv"  # Update path as needed
-    batch_size = 75000
+    # Validate CSV file exists
+    if not os.path.exists(csv_file_path):
+        print(f"❌ CSV file '{csv_file_path}' not found.")
+        print("   Please ensure the file exists and the path is correct.")
+        return 1
     
     try:
         # Load LiDAR points from CSV
@@ -83,7 +157,7 @@ def run():
         
         if not all_points:
             print("❌ No valid points loaded. Exiting.")
-            return
+            return 1
         
         # Show statistics
         calculate_statistics(all_points)
@@ -94,7 +168,7 @@ def run():
         print(f"\nSplit into {total_batches} batches of up to {batch_size} points each")
         
         # Connect to server
-        with grpc.insecure_channel("ec2-3-78-137-76.eu-central-1.compute.amazonaws.com:8080") as channel: # localhost # ec2-3-78-137-76.eu-central-1.compute.amazonaws.com
+        with grpc.insecure_channel(server_address) as channel:
             client = coordinates_pb2_grpc.CoordinateServiceStub(channel)
             
             # Track statistics
@@ -169,20 +243,31 @@ def run():
             else:
                 print(f"⚠️  Point count mismatch: sent {total_sent:,}, received {total_received:,}")
             
-            # AWS readiness note
-            print(f"\n🚀 Ready for AWS deployment:")
+            # Server info
+            print(f"\n🚀 Processing Summary:")
+            print(f"   - Server: {server_address}")
+            print(f"   - File: {csv_file_path}")
             print(f"   - Processed {len(all_points):,} points successfully")
             print(f"   - Batch size: {batch_size} points")
-            print(f"   - Average throughput: {points_per_second:.0f} points/sec")
+            if total_time > 0:
+                print(f"   - Average throughput: {points_per_second:.0f} points/sec")
+            
+            return 0
                 
     except FileNotFoundError:
         print(f"❌ CSV file '{csv_file_path}' not found.")
         print("   Please ensure the file is in the same directory as this script.")
+        return 1
     except Exception as e:
         print(f"❌ Failed to process: {str(e)}")
- 
-    print("\nPress any key to exit...")
-    input()
+        return 1
  
 if __name__ == "__main__":
-    run()
+    exit_code = run()
+    
+    # Only wait for input if running interactively
+    if sys.stdout.isatty():
+        print("\nPress any key to exit...")
+        input()
+    
+    sys.exit(exit_code)

@@ -355,3 +355,4 @@ KM.EBike-Backend/ApiGateway/LastBuild
 KM.EBike-Backend*.xml
 *.rsuser
 /Logs
+/Examples/AkkaNet.Examples.GrpcServiceExample/python/lidar_data_5x-duplicated.csv
